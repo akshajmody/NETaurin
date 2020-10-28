@@ -47,10 +47,10 @@ export default function Login() {
               <Button disabled={loading} className="w-100" type="submit">LOG IN</Button>
             </Form>
           </Card.Body>
+          <div className="w-100 text-center mb-3">
+            <Link to="/signup">Don't have an account? Sign up here!</Link>
+          </div>
         </Card>
-        <div className="w-100 text-center mt-2">
-          <Link to="/signup">Don't have an account? Sign up here!</Link>
-        </div>
       </div>
     </>
   )

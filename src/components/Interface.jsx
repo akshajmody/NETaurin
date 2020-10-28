@@ -2,24 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Interface() {
   const [error, setError] = useState('');
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const [bookState, setBookState] = useState({
-    bookOne: "bookOne",
-    bookTwo: "bookTwo",
-    bookThree: "bookThree",
-    bookFour: "bookFour",
-    bookFive: "bookFive",
-    bookSix: "bookSix",
-    bookSeven: "bookSeven",
-    bookEight: "bookEight",
-    bookNine: "bookNine",
-    bookTen: "bookTen"
-  });
+  const [apiData, setApiData] = useState({});
 
+  //AXIOS REQUEST
+  //SET BOOK STATE
+  useEffect(() => {
+    axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RF_API_KEY}&type=bestsellers&url=https%3A%2F%2Fwww.amazon.com%2Fbest-sellers-books-Amazon%2Fzgbs%2Fbooks&page=1&output=json`)
+    .then((response) => {
+      setApiData(response.data)
+    })
+  }, [])
 
 
   async function handleLogout() {
@@ -33,29 +31,28 @@ export default function Interface() {
     }
   }
 
+  let time = new Date().toLocaleTimeString('en-US');
 
+  //FOR LOOP FOR BOOK TITLES
 
   return (
     <>
       <Card>
-      <div className="text-center">{bookState.bookOne}</div>
-      <div className="text-center">{bookState.bookTwo}</div>
-      <div className="text-center">{bookState.bookThree}</div>
-      <div className="text-center">{bookState.bookFour}</div>
-      <div className="text-center">{bookState.bookFive}</div>
-      <div className="text-center">{bookState.bookSix}</div>
-      <div className="text-center">{bookState.bookSeven}</div>
-      <div className="text-center">{bookState.bookEight}</div>
-      <div className="text-center">{bookState.bookNine}</div>
-      <div className="text-center">{bookState.bookTen}</div>
         <Card.Body>
-        <h2 className="text-center mb-4">Welcome Back <strong>{currentUser.email} </strong></h2>
-        {error && <Alert variant="danger">{error}</Alert>}
-        <strong>Email:</strong> {currentUser.email}
+          <h2 className="text-center mb-1 mr-5 ml-5">Welcome back <strong>{currentUser.email}! </strong></h2>
+          <div className="text-center">Today's bestsellers as of {time}:</div>
+          <div>
+            {apiData.bestsellers ? apiData.bestsellers.slice(0,10).map((bestseller) =>
+            <div>
+              <Card key={bestseller.asin}> #{bestseller.rank}: {bestseller.title}
+              <img class="h-100" src={bestseller.image}></img> </Card>
+            </div>) : ""}
+          </div>
+          {error && <Alert variant="danger">{error}</Alert>}
         </Card.Body>
-      <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>Log Out</Button>
-      </div>
+        <div className="w-100 text-center mt-2">
+          <Button variant="link" onClick={handleLogout}>Log Out</Button>
+        </div>
       </Card>
     </>
   )
