@@ -29,12 +29,11 @@ export default function Login() {
   return (
     //FRAGMENT
     <>
-      {/* <h1 style={{fontSize: "20px"}} className="text-center mb-5">ネット雨林</h1> */}
       <div className="w-100" style={{ maxWidth: '425px' }}>
         <Card>
           <Card.Body>
             <h1 className="text-center mb-3">NETaurin</h1>
-            <h6 className="text-center mb-3">Sign in as existing user</h6>
+            <h6 className="text-center mb-3">Sign in as an existing user</h6>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
