@@ -30,7 +30,7 @@ export default function Login() {
     //FRAGMENT
     <>
       <div className="w-100" style={{ maxWidth: '425px' }}>
-        <Card>
+        <Card className="d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
           <Card.Body>
             <h1 className="text-center mb-3">NETaurin</h1>
             <h6 className="text-center mb-3">Sign in as an existing user</h6>

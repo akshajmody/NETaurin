@@ -3,6 +3,7 @@ import { Card, Button, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/interface.css';
 
 export default function Interface() {
   const [error, setError] = useState('');
@@ -41,12 +42,13 @@ export default function Interface() {
         <Card.Body>
           <h2 className="text-center mb-1 mr-5 ml-5">Welcome back <strong>{currentUser.email}! </strong></h2>
           <div className="text-center">Today's bestsellers as of {time}:</div>
-          <div>
+          <div className="bookList">
             {apiData.bestsellers ? apiData.bestsellers.slice(0,10).map((bestseller) =>
-            <div>
+            <Link to={`/reviews/${bestseller.asin}`}>
               <Card key={bestseller.asin}> #{bestseller.rank}: {bestseller.title}
-              <img class="h-100" src={bestseller.image}></img> </Card>
-            </div>) : ""}
+                <Card.Img src={bestseller.image} alt="book image" />
+              </Card>
+            </Link>) : ""}
           </div>
           {error && <Alert variant="danger">{error}</Alert>}
         </Card.Body>
