@@ -52,9 +52,9 @@ export default function Reviews() {
   useEffect(() => {
     axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RF_API_KEY}&type=product&amazon_domain=amazon.com&asin=${asin}&output=json`)
     .then((response) => {
-      setBookData(response.data)
+      setBookData(response.data);
+      getReviews();
     })
-    getReviews();
   }, [asin])
 
 
@@ -69,9 +69,9 @@ export default function Reviews() {
       {bookData.product ? <Card.Img className="mt-3 mb-2" src={bookData.product.main_image.link} alt="book images"/> : <Card.Img className="loadImage" src="https://www.fpt-software.com/wp-content/themes/genesis_fpt-software/core/custom_ajax/loading2.gif" alt="loading"/>}
       <div className="reviewHeader">Add a review:</div>
         <Form onSubmit={postReview}>
-          <Form.Group id="rating" className="w-25">
-            <Form.Label>Rating (1 to 5)</Form.Label>
-            <Form.Control onChange={(e) => setRating(e.target.value)} as="select">
+          <Form.Group id="rating">
+            <Form.Label className="w-30">Rating (1 to 5)</Form.Label>
+            <Form.Control className="w-25" onChange={(e) => setRating(e.target.value)} as="select">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -83,7 +83,9 @@ export default function Reviews() {
             <Form.Label>Comments</Form.Label>
             <Form.Control onChange={(e) => setComments(e.target.value)} placeholder="Please share your thoughts on this book"/>
           </Form.Group>
-          <Button variant="success" className="w-50"  type="submit">Submit Review</Button>
+          <div className="submitReview">
+            <Button variant="success" className="w-50"  type="submit">Submit Review</Button>
+          </div>
         </Form>
       <div className="reviewHeader">NETaurin community reviews:</div>
       {reviews.map((review) => (
@@ -94,7 +96,6 @@ export default function Reviews() {
           <div>{review.date}</div>
         </Card>
       ))}
-
     </Card>
   )
 }
