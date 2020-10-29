@@ -5,10 +5,12 @@
 
 .interfaceCard {
   background-color: rgb(191, 248, 191);
+  color: darkgreen;
 }
 
 .bookLink {
   color: darkgreen;
+  font-weight: bolder;
 }
 
 .bookLink:hover {
