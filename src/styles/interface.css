@@ -2,3 +2,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
+
+.interfaceCard {
+  background-color: rgb(191, 248, 191);
+}
