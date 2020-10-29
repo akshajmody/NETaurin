@@ -1,0 +1,9 @@
+.comments {
+  max-width: 425px;
+}
+
+.reviewHeader {
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 5px;
+}
