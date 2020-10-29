@@ -36,7 +36,7 @@ export default function Login() {
             <h1 className="text-center mb-3">NETaurin</h1>
             <h6 className="text-center mb-3">Sign in as an existing user</h6>
             {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
+            <Form className="form" onSubmit={handleSubmit}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />
