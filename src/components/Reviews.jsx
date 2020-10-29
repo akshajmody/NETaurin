@@ -50,7 +50,7 @@ export default function Reviews() {
 
   //When component mounts - API call is made to retrieve image and relevant data so that this link can be accessed without needing to retrieve data from the main interface page
   useEffect(() => {
-    axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RF_API_KEY}&type=product&amazon_domain=amazon.com&asin=${asin}&output=json`)
+    axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RFN_API_KEY}&type=product&amazon_domain=amazon.com&asin=${asin}&output=json`)
     .then((response) => {
       setBookData(response.data);
       getReviews();

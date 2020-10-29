@@ -15,7 +15,7 @@ export default function Interface() {
 
   //Upon entry into the private route to the main interface, an axios request will retrieve the top 10 bestselling books. This is modular in that we can change this application to retrieve and display a top 10 of any bestseller in a clean format.
   useEffect(() => {
-    axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RF_API_KEY}&type=bestsellers&url=https%3A%2F%2Fwww.amazon.com%2Fbest-sellers-books-Amazon%2Fzgbs%2Fbooks&page=1&output=json`)
+    axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RFN_API_KEY}&type=bestsellers&url=https%3A%2F%2Fwww.amazon.com%2Fbest-sellers-books-Amazon%2Fzgbs%2Fbooks&page=1&output=json`)
     .then((response) => {
       setApiData(response.data)
     })
