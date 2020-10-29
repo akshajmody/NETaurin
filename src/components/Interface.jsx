@@ -11,10 +11,12 @@ export default function Interface() {
   const history = useHistory();
   const [apiData, setApiData] = useState({});
 
+
+
   //AXIOS REQUEST
   //SET BOOK STATE
   useEffect(() => {
-    axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RF_API_KEY}&type=bestsellers&url=https%3A%2F%2Fwww.amazon.com%2Fbest-sellers-books-Amazon%2Fzgbs%2Fbooks&page=1&output=json`)
+    axios.get(`https://api.rainforestapi.com/request?api_key=${process.env.REACT_APP_RFN_API_KEY}&type=bestsellers&url=https%3A%2F%2Fwww.amazon.com%2Fbest-sellers-books-Amazon%2Fzgbs%2Fbooks&page=1&output=json`)
     .then((response) => {
       setApiData(response.data)
     })
@@ -39,11 +41,13 @@ export default function Interface() {
       <Card className="interfaceCard">
         <Card.Body>
           <h2 className="text-center mb-2 mr-5 ml-5">Welcome back <strong>{currentUser.email}! </strong></h2>
+          <div className="text-center mb-2">Click a title below to submit reviews or see past reviews</div>
           <div className="text-center mb-2">Today's bestsellers as of {time}:</div>
           <div className="bookList">
             {apiData.bestsellers ? apiData.bestsellers.slice(0,10).map((bestseller) =>
-            <Link to={`/reviews/${bestseller.asin}`}>
-              <Card key={bestseller.asin}> #{bestseller.rank}: {bestseller.title}
+            <Link className="bookLink" to={`/reviews/${bestseller.asin}`}>
+              <Card key={bestseller.asin}>
+                <div className="bookTitle">#{bestseller.rank}: {bestseller.title}</div>
                 <Card.Img src={bestseller.image} alt="book image" />
               </Card>
             </Link>) : <img className="loadImage" src="https://www.fpt-software.com/wp-content/themes/genesis_fpt-software/core/custom_ajax/loading2.gif" alt="loading"/>}
@@ -51,7 +55,7 @@ export default function Interface() {
           {error && <Alert variant="danger">{error}</Alert>}
         </Card.Body>
         <div className="w-100 text-center mt-2">
-          <Button variant="link" onClick={handleLogout}>Log Out</Button>
+          <Button className="mb-3" variant="success" onClick={handleLogout}>Log Out</Button>
         </div>
       </Card>
     </>

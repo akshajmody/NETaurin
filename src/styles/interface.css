@@ -6,3 +6,20 @@
 .interfaceCard {
   background-color: rgb(191, 248, 191);
 }
+
+.bookLink {
+  color: darkgreen;
+}
+
+.bookLink:hover {
+  color: goldenrod;
+}
+
+.bookTitle {
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  height: 50px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
